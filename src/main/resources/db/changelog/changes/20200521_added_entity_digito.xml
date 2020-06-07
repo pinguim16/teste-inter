@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20200603-1" author="cesar.araujo">
+        <createTable tableName="digito">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="entrada_n" type="varchar(255)"/>
+            <column name="entrada_k" type="bigint"/>
+            <column name="concat_p"  type="varchar(255)"/>
+            <column name="resultado_digito_unico"  type="bigint"/>
+            <column name="usuario_id"  type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200603-2" author="cesar.araujo">
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="digito"
+                                 constraintName="fk_digito_usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+    </changeSet>
+
+    <changeSet id="20200603-3" author="cesar.araujo">
+        <createIndex
+                indexName="idx_digito"
+                tableName="digito">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
