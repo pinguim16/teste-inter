@@ -1,7 +1,5 @@
 package com.provainter.model.dto;
 
-import com.provainter.model.Digito;
-
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,7 +17,9 @@ public class UsuarioDTO {
 
     private String email;
 
-    private Set<Digito> digitosUnicos;
+    private Set<DigitoDTO> digitosUnicos;
+
+    private byte[] dadosCriptografados;
 
     public Long getId() {
         return id;
@@ -45,12 +45,20 @@ public class UsuarioDTO {
         this.email = email;
     }
 
-    public Set<Digito> getDigitosUnicos() {
+    public Set<DigitoDTO> getDigitosUnicos() {
         return digitosUnicos;
     }
 
-    public void setDigitosUnicos(Set<Digito> digitosUnicos) {
+    public void setDigitosUnicos(Set<DigitoDTO> digitosUnicos) {
         this.digitosUnicos = digitosUnicos;
+    }
+
+    public byte[] getDadosCriptografados() {
+        return dadosCriptografados;
+    }
+
+    public void setDadosCriptografados(byte[] dadosCriptografados) {
+        this.dadosCriptografados = dadosCriptografados;
     }
 
     @Override

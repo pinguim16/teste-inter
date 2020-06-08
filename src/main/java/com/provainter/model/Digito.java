@@ -28,10 +28,6 @@ public class Digito {
     @Column(name = "resultado_digito_unico")
     private Integer resultadoDigitoUnico;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
     public Long getId() {
         return id;
     }
@@ -72,11 +68,4 @@ public class Digito {
         this.resultadoDigitoUnico = resultadoDigitoUnico;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 }

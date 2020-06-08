@@ -18,7 +18,7 @@ public class PaginationUtil {
     private PaginationUtil() {
     }
 
-    public static HttpHeaders generacaoPaginacaoHttpHeaders(Page page, String baseUrl) {
+    public static HttpHeaders generacaoPaginacaoHttpHeaders(Page<?> page, String baseUrl) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-Total-Count", Long.toString(page.getTotalElements()));

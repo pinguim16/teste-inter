@@ -24,7 +24,11 @@ public class Usuario {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @Column(name = "dados_criptografados")
+    private byte[] dadosCriptografados;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id")
     private Set<Digito> digitosUnicos;
 
     public Long getId() {
@@ -57,6 +61,14 @@ public class Usuario {
 
     public void setDigitosUnicos(Set<Digito> digitosUnicos) {
         this.digitosUnicos = digitosUnicos;
+    }
+
+    public byte[] getDadosCriptografados() {
+        return dadosCriptografados;
+    }
+
+    public void setDadosCriptografados(byte[] dadosCriptografados) {
+        this.dadosCriptografados = dadosCriptografados;
     }
 
     @Override

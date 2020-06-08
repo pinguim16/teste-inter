@@ -12,7 +12,7 @@ import java.util.List;
  * @see com.provainter.mapper
  * @since 06/06/2020
  */
-@Mapper
+@Mapper(uses = DigitoMapper.class)
 public interface UsuarioMapper {
 
     UsuarioMapper INSTANCE = Mappers.getMapper(UsuarioMapper.class);

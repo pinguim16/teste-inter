@@ -4,17 +4,18 @@ import com.provainter.model.dto.UsuarioDTO;
 import com.provainter.service.UsuarioService;
 import com.provainter.util.HeaderUtil;
 import com.provainter.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -83,11 +84,11 @@ public class UsuarioResource {
      * @return ResponseEntity com status 200 (ok) e lista de usuarios no body
      */
     @GetMapping
-    public ResponseEntity<List<UsuarioDTO>> getAllUsuario(@ApiParam Pageable pageable){
+    public ResponseEntity<List<UsuarioDTO>> getAllUsuario(@RequestParam("size") Integer size, @RequestParam("page") Integer page){
         log.debug("REST request para buscar uma pagina de Usuario");
-        Page<UsuarioDTO> page = this.usuarioService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generacaoPaginacaoHttpHeaders(page, "/api/arquivos");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        Page<UsuarioDTO> usuarioDTOS = this.usuarioService.findAll(PageRequest.of(page,size));
+        HttpHeaders headers = PaginationUtil.generacaoPaginacaoHttpHeaders(usuarioDTOS, "/api/arquivos");
+        return new ResponseEntity<>(usuarioDTOS.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -99,10 +100,14 @@ public class UsuarioResource {
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> getUsuario(@PathVariable Long id){
         log.debug("REST request para buscar Usuario : {}", id);
-        UsuarioDTO usuarioDTO = this.usuarioService.findOne(id);
-        if(usuarioDTO != null){
-            return ResponseEntity.ok().body(usuarioDTO);
-        }else{
+        try {
+            UsuarioDTO usuarioDTO = this.usuarioService.findOne(id);
+            if (usuarioDTO != null) {
+                return ResponseEntity.ok().body(usuarioDTO);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        }catch (EntityNotFoundException e){
             return ResponseEntity.noContent().build();
         }
     }
@@ -120,4 +125,11 @@ public class UsuarioResource {
         return ResponseEntity.ok().headers(HeaderUtil.criacaoAlertaParaEntidadeDeletada(ENTITY_NAME, id.toString())).build();
     }
 
+    @GetMapping("/listar-calculos/{idUsuario}")
+    public ResponseEntity<?> buscarCalculosPorUsuario(@PathVariable("idUsuario") Long idUsuario){
+        if(idUsuario == null){
+            return ResponseEntity.badRequest().body("Não é possível pesquisar cálculos sem id do usuário.");
+        }
+        return ResponseEntity.ok(this.usuarioService.findOne(idUsuario).getDigitosUnicos());
+    }
 }

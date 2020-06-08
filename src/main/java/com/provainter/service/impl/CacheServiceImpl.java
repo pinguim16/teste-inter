@@ -20,8 +20,8 @@ import java.util.Map;
 public class CacheServiceImpl implements CacheService {
 
     private static final int CACHE_LIMIT = 10;
-    private static final Map<MapKeyCacheDigito, DigitoDTO> CACHE = new LinkedHashMap<>();
-    private static final Map<PublicKey, MapKeyCache> CACHE_CRIP = new LinkedHashMap<>();
+    public static final Map<MapKeyCacheDigito, DigitoDTO> CACHE = new LinkedHashMap<>();
+    public static final Map<PublicKey, MapKeyCache> CACHE_CRIP = new LinkedHashMap<>();
 
     @Override
     synchronized public void adicionaDigitoCache(DigitoDTO digitoDTO, String entradaN, Integer entradaK) {
@@ -45,7 +45,7 @@ public class CacheServiceImpl implements CacheService {
 
     @Override
     public void adicionaChaveCache(Long idUsuario, PublicKey publicKey, PrivateKey privateKey) {
-        MapKeyCache mapKeyCache = new MapKeyCache(idUsuario, privateKey);
+        MapKeyCache mapKeyCache = new MapKeyCache(idUsuario, privateKey, publicKey);
         CACHE_CRIP.put(publicKey, mapKeyCache);
     }
 

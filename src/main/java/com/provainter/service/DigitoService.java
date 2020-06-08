@@ -1,5 +1,7 @@
 package com.provainter.service;
 
+import com.provainter.model.dto.UsuarioDTO;
+
 /**
  * @author Cesar
  * @see com.provainter.resource
@@ -14,7 +16,7 @@ public interface DigitoService {
      * @param entradaK - número	de	vezes da concatenação
      * @return Integer com a soma do digitos
      */
-    Integer digitoUnico(Integer entradaK, String entradaN);
+    Integer digitoUnico(Integer entradaK, String entradaN, UsuarioDTO usuario);
 
     /**
      * Responsável por gerar a string p parae cáculo

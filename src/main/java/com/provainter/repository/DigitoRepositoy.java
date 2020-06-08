@@ -1,8 +1,9 @@
 package com.provainter.repository;
 
-import com.provainter.model.Digito;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.provainter.model.Digito;
 
 /**
  * @author Cesar
@@ -12,4 +13,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DigitoRepositoy extends JpaRepository<Digito, Long> {
+
 }

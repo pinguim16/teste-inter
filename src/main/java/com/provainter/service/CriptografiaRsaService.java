@@ -3,6 +3,9 @@ package com.provainter.service;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+
+import com.provainter.exceptions.UsuarioNaoEncontradoException;
+
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 
@@ -17,10 +20,12 @@ public interface CriptografiaRsaService {
 
     String descriptografia(PrivateKey privateKey, byte[] dadosUsuario) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException;
 
-    KeyPair genKeyPair() throws NoSuchAlgorithmException;
+    KeyPair generateKeyPair() throws NoSuchAlgorithmException;
 
     PublicKey converteStringEmChavePublica(String strPublicKey) throws InvalidKeySpecException, NoSuchAlgorithmException;
 
     String gerarChavePublica(Long idUsuario) throws NoSuchAlgorithmException;
+
+    void criptografiaComPublicaStr(String strPublicKey) throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, UsuarioNaoEncontradoException;
 
 }

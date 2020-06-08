@@ -1,7 +1,5 @@
 package com.provainter.model.dto;
 
-import com.provainter.model.Usuario;
-
 /**
  * @author Cesar
  * @see com.provainter.resource
@@ -13,13 +11,13 @@ public class DigitoDTO {
 
     private String entradaN;
 
-    private String entradaK;
+    private Integer entradaK;
 
     private String concatP;
 
     private Integer resultadoDigitoUnico;
 
-    private Usuario usuario;
+    private UsuarioDTO usuario;
 
     public Long getId() {
         return id;
@@ -37,11 +35,11 @@ public class DigitoDTO {
         this.entradaN = entradaN;
     }
 
-    public String getEntradaK() {
+    public Integer getEntradaK() {
         return entradaK;
     }
 
-    public void setEntradaK(String entradaK) {
+    public void setEntradaK(Integer entradaK) {
         this.entradaK = entradaK;
     }
 
@@ -61,11 +59,11 @@ public class DigitoDTO {
         this.resultadoDigitoUnico = resultadoDigitoUnico;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
 }

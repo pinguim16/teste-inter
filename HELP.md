@@ -21,7 +21,7 @@ The following guides illustrate how to use some features concretely:
 
 
 ### Configurações Básicas do Projeto
-* Url para acesso ao banco : http://localhost:8080/h2-console
+* Url para acesso ao banco : http://localhost:8080/api/h2-console
 * Endereço configurado application.properties: jdbc:h2:mem:testdb 
 
 ###Acesso ao Swagger 

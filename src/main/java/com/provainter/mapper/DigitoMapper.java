@@ -1,9 +1,10 @@
 package com.provainter.mapper;
 
-import com.provainter.model.Digito;
-import com.provainter.model.dto.DigitoDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import com.provainter.model.Digito;
+import com.provainter.model.dto.DigitoDTO;
 
 /**
  * @author Cesar

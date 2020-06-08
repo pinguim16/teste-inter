@@ -1,6 +1,7 @@
 package com.provainter.model;
 
 import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.Objects;
 
 /**
@@ -14,9 +15,12 @@ public class MapKeyCache {
 
     private PrivateKey privateKey;
 
-    public MapKeyCache(Long idUsuario, PrivateKey privateKey) {
+    private PublicKey publicKey;
+
+    public MapKeyCache(Long idUsuario, PrivateKey privateKey, PublicKey publicKey) {
         this.idUsuario = idUsuario;
         this.privateKey = privateKey;
+        this.publicKey = publicKey;
     }
 
     public Long getIdUsuario() {
@@ -33,6 +37,14 @@ public class MapKeyCache {
 
     public void setPrivateKey(PrivateKey privateKey) {
         this.privateKey = privateKey;
+    }
+
+    public PublicKey getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(PublicKey publicKey) {
+        this.publicKey = publicKey;
     }
 
     @Override
