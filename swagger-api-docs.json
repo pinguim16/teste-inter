@@ -1,0 +1,423 @@
+{
+  "swagger":"2.0",
+  "info":{
+    "description":"Api para avaliação de código Banco Inter",
+    "version":"0.0.1",
+    "title":"Api Banco Inter - Teste"
+  },
+  "host":"localhost:8080",
+  "basePath":"/api",
+  "tags":[
+    {
+      "name":"Endpoints relacionados a criptografia.",
+      "description":"Criptografia Resource"
+    },
+    {
+      "name":"Endpoints relacionados ao crud de usuário",
+      "description":"Usuario Resource"
+    },
+    {
+      "name":"Endpoints relacionados ao cálculo de digitoUnico",
+      "description":"Digito Resource"
+    }
+  ],
+  "paths":{
+    "/criptografia":{
+      "post":{
+        "tags":[
+          "Endpoints relacionados a criptografia."
+        ],
+        "summary":"Endpoint para geração de chave pública para usuário",
+        "operationId":"criptografiaDadosUsuarioUsingPOST",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "*/*"
+        ],
+        "parameters":[
+          {
+            "in":"body",
+            "name":"chavePublica",
+            "description":"chavePublica",
+            "required":true,
+            "schema":{
+              "type":"string"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Retorna confirmação de criptografia gerada.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          "400":{
+            "description":"Caso usuário não seja encontrado."
+          },
+          "500":{
+            "description":"Caso aconteça algo erro na geração da criptografia."
+          }
+        },
+        "deprecated":false
+      }
+    },
+    "/criptografia/gerar-chave-publica/{idUsuario}":{
+      "get":{
+        "tags":[
+          "Endpoints relacionados a criptografia."
+        ],
+        "summary":"Endpoint para geração de chave pública para usuário",
+        "operationId":"gerarChavePublicUsingGET",
+        "produces":[
+          "*/*"
+        ],
+        "parameters":[
+          {
+            "name":"idUsuario",
+            "in":"path",
+            "description":"idUsuario",
+            "required":true,
+            "type":"integer",
+            "format":"int64"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Retorna chave pública gerada.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          "400":{
+            "description":"Se id do usuário não for enviado."
+          }
+        },
+        "deprecated":false
+      }
+    },
+    "/digito-unico/{entradaN}/{entradaK}":{
+      "get":{
+        "tags":[
+          "Endpoints relacionados ao cálculo de digitoUnico"
+        ],
+        "summary":"Endpoint para realizar cálculo do digitoUnico",
+        "operationId":"digitoUnicoUsingGET",
+        "produces":[
+          "*/*"
+        ],
+        "parameters":[
+          {
+            "name":"entradaK",
+            "in":"path",
+            "description":"entradaK",
+            "required":true,
+            "type":"integer",
+            "format":"int32"
+          },
+          {
+            "name":"entradaN",
+            "in":"path",
+            "description":"entradaN",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "in":"body",
+            "name":"usuario",
+            "description":"usuario",
+            "required":false,
+            "schema":{
+              "$ref":"#/definitions/UsuarioDTO"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Retorna resultado do cálculo de digito único.",
+            "schema":{
+              "type":"integer",
+              "format":"int32"
+            }
+          },
+          "400":{
+            "description":"Retorno em caso de valores nulos enviados."
+          }
+        },
+        "deprecated":false
+      }
+    },
+    "/usuario":{
+      "get":{
+        "tags":[
+          "Endpoints relacionados ao crud de usuário"
+        ],
+        "summary":"Endpoint que retorna todos os usuários cadastrados",
+        "operationId":"getAllUsuarioUsingGET",
+        "produces":[
+          "*/*"
+        ],
+        "parameters":[
+          {
+            "name":"page",
+            "in":"query",
+            "description":"page",
+            "required":true,
+            "type":"integer",
+            "format":"int32"
+          },
+          {
+            "name":"size",
+            "in":"query",
+            "description":"size",
+            "required":true,
+            "type":"integer",
+            "format":"int32"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Retorna listagem de usuários cadastrados.",
+            "schema":{
+              "type":"array",
+              "items":{
+                "$ref":"#/definitions/UsuarioDTO"
+              }
+            }
+          }
+        },
+        "deprecated":false
+      },
+      "post":{
+        "tags":[
+          "Endpoints relacionados ao crud de usuário"
+        ],
+        "summary":"Endpoint para cadastro de usuários",
+        "operationId":"criacaoUsuarioUsingPOST",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "*/*"
+        ],
+        "parameters":[
+          {
+            "in":"body",
+            "name":"usuarioDTO",
+            "description":"usuarioDTO",
+            "required":true,
+            "schema":{
+              "$ref":"#/definitions/UsuarioDTO"
+            }
+          }
+        ],
+        "responses":{
+          "201":{
+            "description":"Retorna usuário cadastrado",
+            "schema":{
+              "$ref":"#/definitions/UsuarioDTO"
+            }
+          },
+          "400":{
+            "description":"Novo usuário não possui id."
+          }
+        },
+        "deprecated":false
+      },
+      "put":{
+        "tags":[
+          "Endpoints relacionados ao crud de usuário"
+        ],
+        "summary":"Endpoint para update de usuários",
+        "operationId":"updateUsuarioUsingPUT",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "*/*"
+        ],
+        "parameters":[
+          {
+            "in":"body",
+            "name":"usuarioDTO",
+            "description":"usuarioDTO",
+            "required":true,
+            "schema":{
+              "$ref":"#/definitions/UsuarioDTO"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Retorna usuário cadastrado",
+            "schema":{
+              "$ref":"#/definitions/UsuarioDTO"
+            }
+          },
+          "400":{
+            "description":"Retorno em caso de ser enviado nome ou e-mail nulos ou em branco."
+          }
+        },
+        "deprecated":false
+      }
+    },
+    "/usuario/listar-calculos/{idUsuario}":{
+      "get":{
+        "tags":[
+          "Endpoints relacionados ao crud de usuário"
+        ],
+        "summary":"Endpoint para retornar todos os calculos realizados por um usuário.",
+        "operationId":"buscarCalculosPorUsuarioUsingGET",
+        "produces":[
+          "*/*"
+        ],
+        "parameters":[
+          {
+            "name":"idUsuario",
+            "in":"path",
+            "description":"idUsuario",
+            "required":true,
+            "type":"integer",
+            "format":"int64"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Retorna os calculos por usuários.",
+            "schema":{
+              "type":"array",
+              "items":{
+                "$ref":"#/definitions/DigitoDTO"
+              }
+            }
+          },
+          "400":{
+            "description":"Retorno em caso de usuários não encontrados."
+          }
+        },
+        "deprecated":false
+      }
+    },
+    "/usuario/{idUsuario}":{
+      "get":{
+        "tags":[
+          "Endpoints relacionados ao crud de usuário"
+        ],
+        "summary":"Endpoint para buscar usuário cadastrado",
+        "operationId":"getUsuarioUsingGET",
+        "produces":[
+          "*/*"
+        ],
+        "parameters":[
+          {
+            "name":"idUsuario",
+            "in":"path",
+            "description":"idUsuario",
+            "required":true,
+            "type":"integer",
+            "format":"int64"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Retorna usuário cadastrado.",
+            "schema":{
+              "$ref":"#/definitions/UsuarioDTO"
+            }
+          },
+          "400":{
+            "description":"Retorno em casos de usuários não encontrados."
+          }
+        },
+        "deprecated":false
+      },
+      "delete":{
+        "tags":[
+          "Endpoints relacionados ao crud de usuário"
+        ],
+        "summary":"Endpoint para deletar usuário cadastrado",
+        "operationId":"deleteUsuarioUsingDELETE",
+        "produces":[
+          "*/*"
+        ],
+        "parameters":[
+          {
+            "name":"idUsuario",
+            "in":"path",
+            "description":"idUsuario",
+            "required":true,
+            "type":"integer",
+            "format":"int64"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Deleta usuário cadastrado.",
+            "schema":{
+              "type":"object"
+            }
+          },
+          "400":{
+            "description":"Retorno em casos de usuários não encontrados."
+          }
+        },
+        "deprecated":false
+      }
+    }
+  },
+  "definitions":{
+    "DigitoDTO":{
+      "type":"object",
+      "properties":{
+        "concatP":{
+          "type":"string",
+          "description":"Contatenação da entradaN para calcular digito unico."
+        },
+        "entradaK":{
+          "type":"integer",
+          "format":"int32",
+          "description":"EntradaK utilizada no loop para para calcular digito unico."
+        },
+        "entradaN":{
+          "type":"string",
+          "description":"EntradaN utilizada para calcular digito unico."
+        },
+        "id":{
+          "type":"integer",
+          "format":"int64",
+          "description":"Id digitoUnico"
+        },
+        "resultadoDigitoUnico":{
+          "type":"integer",
+          "format":"int32",
+          "description":"Resultado do calculo do digito unico."
+        }
+      },
+      "title":"DigitoDTO"
+    },
+    "UsuarioDTO":{
+      "type":"object",
+      "required":[
+        "email",
+        "nome"
+      ],
+      "properties":{
+        "email":{
+          "type":"string",
+          "description":"Email do Usuário"
+        },
+        "id":{
+          "type":"integer",
+          "format":"int64",
+          "description":"Id usuário"
+        },
+        "nome":{
+          "type":"string",
+          "description":"Nome do Usuário"
+        }
+      },
+      "title":"UsuarioDTO"
+    }
+  }
+}

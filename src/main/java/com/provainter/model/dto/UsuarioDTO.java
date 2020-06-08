@@ -1,5 +1,9 @@
 package com.provainter.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,14 +15,19 @@ import java.util.Set;
 
 public class UsuarioDTO {
 
+    @ApiModelProperty("Id usuário")
     private Long id;
 
+    @ApiModelProperty(value = "Nome do Usuário", required = true)
     private String nome;
 
+    @ApiModelProperty(value = "Email do Usuário", required = true)
     private String email;
 
+    @JsonIgnore
     private Set<DigitoDTO> digitosUnicos;
 
+    @JsonIgnore
     private byte[] dadosCriptografados;
 
     public Long getId() {

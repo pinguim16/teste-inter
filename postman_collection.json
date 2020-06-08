@@ -1,0 +1,1063 @@
+{
+	"info": {
+		"_postman_id": "1c73ff76-2e73-46bd-9787-dabdc9569888",
+		"name": "inter-prova",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "usuario",
+			"item": [
+				{
+					"name": "Get Usuario - 204",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d5c49fa-f4df-4757-9671-4432920ae8bf",
+								"exec": [
+									"tests[\"Status 204\"] = responseCode.code == 204;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"nome\":\"Teste Usuário 2\",\n\t\"email\":\"testeusuario2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criação do Usuário - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "69f44ac6-1398-479d-9bcd-c17901365a90",
+								"exec": [
+									"tests[\"Status 201\"] = responseCode.code == 201;\r",
+									"\r",
+									"var body = JSON.parse(responseBody);\r",
+									"tests[\"Verificando nome Usuário\"] = body.nome == 'Teste Usuário';\r",
+									"tests[\"Verify email Usuário\"] = body.email == 'testeusuario@gmail.com';\r",
+									"pm.environment.set(\"idUsuarioGet\", body.id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\":\"Teste Usuário\",\n\t\"email\":\"testeusuario@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criação do Usuário - 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3ae2ae4-008f-4caf-81a1-0fb5baecf1cc",
+								"exec": [
+									"tests[\"Status 400\"] = responseCode.code == 400;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":1, \n\t\"nome\":\"Teste Usuário\",\n\t\"email\":\"testeusuario@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update do Usuário - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86ddbbfa-4ccd-4ccc-b542-9312121a2a73",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									"var body = JSON.parse(responseBody);\r",
+									"tests[\"Verificando nome Usuário\"] = body.nome == 'Teste Usuário 2';\r",
+									"tests[\"Verify email Usuário\"] = body.email == 'testeusuario2@gmail.com';\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"nome\":\"Teste Usuário 2\",\n\t\"email\":\"testeusuario2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update do Usuário - 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "31c90213-a993-4daf-a644-49cc0574e4a2",
+								"exec": [
+									"tests[\"Status 400\"] = responseCode.code == 400;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"nome\":\"\",\n\t\"email\":\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Usuarios - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "60cdc2d6-d7ad-4b86-9556-2e58880a19bb",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									"var body = JSON.parse(responseBody);\r",
+									"console.log(body[0]);\r",
+									"tests[\"Verificando nome Usuário\"] = body[0].nome != null;\r",
+									"tests[\"Verify email Usuário\"] = body[0].email != null;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"nome\":\"Teste Usuário 2\",\n\t\"email\":\"testeusuario2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario?size=5&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Usuario - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3b926d05-581b-48ac-9e13-c299bdddd986",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									"var body = JSON.parse(responseBody);\r",
+									"tests[\"Verificando nome Usuário\"] = body.nome != null;\r",
+									"tests[\"Verify email Usuário\"] = body.email != null;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/usuario/{{idUsuarioGet}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"{{idUsuarioGet}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionando Calculos Para um Usuário  1 - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2445931-9e9f-4d67-b807-a6199df35f57",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/digito-unico/9875/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"digito-unico",
+								"9875",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionando Calculos Para um Usuário  2 - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dfe6c1ab-18e6-4463-9b79-0d0bcc35bc15",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/digito-unico/9875/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"digito-unico",
+								"9875",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionando Calculos Para um Usuário  3 - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45d7c833-8d15-44a5-8029-649b6f4f69e6",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/digito-unico/9875/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"digito-unico",
+								"9875",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Calculos do Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "819d46d9-0b64-4f38-bc15-c50675f5ed86",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"nome\":\"Teste Usuário 2\",\n\t\"email\":\"testeusuario2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario/listar-calculos/{{idUsuarioGet}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"listar-calculos",
+								"{{idUsuarioGet}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f7e9bbf6-88da-4650-a187-3759d24d3072",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"nome\":\"Teste Usuário 2\",\n\t\"email\":\"testeusuario2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario/{{idUsuarioGet}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"{{idUsuarioGet}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User - 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e4690032-0aee-4f81-a4c7-903b0437194b",
+								"exec": [
+									"tests[\"Status 400\"] = responseCode.code == 400;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"nome\":\"Teste Usuário 2\",\n\t\"email\":\"testeusuario2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "criptografia",
+			"item": [
+				{
+					"name": "Criação do Usuário - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "62757320-72c0-4466-9d41-d1d0cf2cc2ff",
+								"exec": [
+									"\r",
+									"tests[\"Status 201\"] = responseCode.code == 201;\r",
+									"\r",
+									"var body = JSON.parse(responseBody);\r",
+									"tests[\"Verificando nome Usuário\"] = body.nome == 'Teste Usuário';\r",
+									"tests[\"Verify email Usuário\"] = body.email == 'testeusuario@gmail.com';\r",
+									"pm.environment.set(\"idUsuario\", body.id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\":\"Teste Usuário\",\n\t\"email\":\"testeusuario@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscando Chave Publica",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45b08cd2-d670-461e-89a6-860e0b524ab3",
+								"exec": [
+									"\r",
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"var body = responseBody;\r",
+									"tests[\"verificando se chave foi enviada\"] = body != null;\r",
+									"pm.globals.set(\"publickey\", body);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/criptografia/gerar-chave-publica/{{idUsuario}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"criptografia",
+								"gerar-chave-publica",
+								"{{idUsuario}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criptogrando Dados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71b30eea-75ea-468e-a85d-6ffe26fa5029",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"{{publickey}}\"\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/criptografia",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"criptografia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "43684230-b20c-41ae-b52a-cd5621d8843e",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"nome\":\"Teste Usuário 2\",\n\t\"email\":\"testeusuario2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario/{{idUsuario}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"{{idUsuario}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "digitoUnico",
+			"item": [
+				{
+					"name": "Cálculo - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "15b2712c-039f-41a5-950d-42d0bcbea21e",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/digito-unico/9875/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"digito-unico",
+								"9875",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criação do Usuário - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0ae5aef2-64d0-4e99-ac9c-fb0725332c4b",
+								"exec": [
+									"tests[\"Status 201\"] = responseCode.code == 201;\r",
+									"\r",
+									"var body = JSON.parse(responseBody);\r",
+									"tests[\"Verificando nome Usuário\"] = body.nome == 'Teste Usuário';\r",
+									"tests[\"Verify email Usuário\"] = body.email == 'testeusuario@gmail.com';\r",
+									"pm.environment.set(\"idUsuarioDigito\", body.id);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\":\"Teste Usuário\",\n\t\"email\":\"testeusuario@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cálculo Com Usuario - 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d6d7c15a-b219-41f3-ab75-b6a0d41ca8bb",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": {{idUsuarioDigito}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/digito-unico/9875/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"digito-unico",
+								"9875",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cálculo Com Usuario - 400 - Entrada k Nula",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fc8abc23-1207-4eb6-8a0c-70953e0df19c",
+								"exec": [
+									"tests[\"Status 400\"] = responseCode.code == 400;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/digito-unico/9875/null",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"digito-unico",
+								"9875",
+								"null"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cálculo Com Usuario - 400 - Entrada n Nula Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6d36ef61-9eb1-4403-9074-7609e2edc101",
+								"exec": [
+									"tests[\"Status 400\"] = responseCode.code == 400;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/digito-unico/null/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"digito-unico",
+								"null",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "85631f16-1634-45c9-9fbd-6f5a0b980910",
+								"exec": [
+									"tests[\"Status 200\"] = responseCode.code == 200;\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"nome\":\"Teste Usuário 2\",\n\t\"email\":\"testeusuario2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuario/{{idUsuarioDigito}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"{{idUsuarioDigito}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

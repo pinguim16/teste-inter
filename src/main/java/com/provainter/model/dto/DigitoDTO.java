@@ -1,5 +1,8 @@
 package com.provainter.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * @author Cesar
  * @see com.provainter.resource
@@ -7,16 +10,22 @@ package com.provainter.model.dto;
  */
 public class DigitoDTO {
 
+    @ApiModelProperty("Id digitoUnico")
     private Long id;
 
+    @ApiModelProperty("EntradaN utilizada para calcular digito unico.")
     private String entradaN;
 
+    @ApiModelProperty("EntradaK utilizada no loop para para calcular digito unico.")
     private Integer entradaK;
 
+    @ApiModelProperty("Contatenação da entradaN para calcular digito unico.")
     private String concatP;
 
+    @ApiModelProperty("Resultado do calculo do digito unico.")
     private Integer resultadoDigitoUnico;
 
+    @JsonIgnore
     private UsuarioDTO usuario;
 
     public Long getId() {

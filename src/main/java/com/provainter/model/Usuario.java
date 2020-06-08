@@ -1,5 +1,7 @@
 package com.provainter.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -18,16 +20,18 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(name = "nome")
     private String nome;
 
+    @NotNull
     @Column(name = "email")
     private String email;
 
     @Column(name = "dados_criptografados")
     private byte[] dadosCriptografados;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
     private Set<Digito> digitosUnicos;
 

@@ -56,8 +56,8 @@ public class DigitoServiceImpl implements DigitoService {
                 Optional<Usuario> optionalUsuario = this.usuarioRepository.findById(usuario.getId());
                 if(optionalUsuario.isPresent()){
                     optionalUsuario.get().getDigitosUnicos().add(digito);
+                    this.usuarioRepository.save(optionalUsuario.get());
                 }
-                this.digitoRepositoy.save(digito);
             }
             digitoDTO = DigitoMapper.INSTANCE.digitoToDigitoDTO(digito);
             this.cacheService.adicionaDigitoCache(digitoDTO,entradaN, entradaK);
