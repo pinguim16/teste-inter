@@ -74,3 +74,7 @@ Api para avaliação de código Banco Inter
 ```
 [POST] /criptografia/gerar-chave-publica/{Integer}
 ```
+
+### Observações
+
+- Swagger(Open API) e Postman Collection (postman_collection.json) se encontram na raiz do projeto	
