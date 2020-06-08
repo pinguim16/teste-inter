@@ -43,4 +43,9 @@ public interface UsuarioService {
      */
     void delete(Long id);
 
+    /**
+     * Deleta todos os usuário
+     */
+    void deleteAllUsuarios();
+
 }

@@ -81,4 +81,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         log.debug("Request para deletar usuario : {}", id);
         this.usuarioRepository.deleteById(id);
     }
+
+    /**
+     * Deleta todos os usuário
+     */
+    @Override
+    public void deleteAllUsuarios() {
+       this.usuarioRepository.deleteAll();
+    }
 }

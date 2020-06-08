@@ -6,61 +6,71 @@ Api para avaliação de código Banco Inter
 ` mvnw spring-boot:run `
 
 **To run unit tests:**
-` mvn test `
+` mvnw test `
+* Test unitários aplicados apenas para services, pois o teste de intregração está no postman.
 
 **Base URL:**
 ```
- http://localhost:8080/
+ http://localhost:8080/api
  [HEADER] Content-Type: application/json
 ```
 ### User CRUD
 
-- **List Users**
+- **Listagem dos usuários**
 ```
-[GET] api/usuario
-```
-
-- **Find User**
-```
-[GET] api/usuario/{Integer}
+[GET] /usuario?size={Integer}&page={Integer}
 ```
 
-- **Create User**
+- **Busca Usuário**
 ```
-[POST] api/usuario
+[GET] /usuario/{Integer}
+```
+
+- **Criação do Usuário**
+```
+[POST] /usuario
 [BODY] { 
-  "name": String, 
+  "nome": String, 
   "email": String" 
 }
 ```
 
-- **Update User**
+- **Atualização Usuário**
 ```
-[PUT] api/usuario/{Integer}
+[PUT] /usuario
 [BODY] { 
+  "id": Long
   "name": String, 
   "email": String 
 }
 ```
-- **Delete User**
+- **Apagar usuário**
 ```
-[DELETE] api/usuario/{Integer}
-```
-
-### Digits CRUD
-
-- **List Digit**
-```
-[GET] api/digitoUnico
-[HEADER] user: {Integer}
+[DELETE] /usuario/{Integer}
 ```
 
-- **Create Digit**
+- **Buscar cálculos usuário**
 ```
-[POST] api/digitoUnico
-[HEADER] user: {Optional Integer}
-[BODY] { 
-  "k": Integer, 
-  "n": String containing positive number
-}
+[GET] /listar-calculos/{Integer}
+```
+
+### Digito Único
+
+- **Cálculo Digito Único**
+```
+[GET] /digito-unico/{String}/{Integer}
+[Body] user: {Integer}
+```
+
+### Criptografia
+- **Criptografia dos dados do usuário**
+```
+[POST] /criptografia
+[Body] chavePublica: {String}
+```
+- Como não foi informado na documentação o que fazer com os dados criptografados, os mesmo foram salvos no banco para validação
+
+- **Gera Chave Pública**
+```
+[POST] /criptografia/gerar-chave-publica/{Integer}
 ```

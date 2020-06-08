@@ -4,9 +4,11 @@ import com.provainter.mapper.UsuarioMapper;
 import com.provainter.model.Digito;
 import com.provainter.model.Usuario;
 import com.provainter.model.dto.UsuarioDTO;
+import com.provainter.repository.DigitoRepositoy;
+import com.provainter.repository.UsuarioRepository;
 import com.provainter.service.UsuarioService;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -39,11 +41,12 @@ public class UsuarioServiceTest {
     @Test
     @Order(1)
     public void testASalvarUsuario(){
+
         UsuarioDTO usuarioDTO = UsuarioMapper.INSTANCE.usuarioToUsuarioDTO(this.getUsuario());
         usuarioDTO = this.usuarioService.save(usuarioDTO);
 
         assertNotNull(usuarioDTO);
-        assertEquals(1L,usuarioDTO.getId().longValue());
+        assertNotNull(usuarioDTO.getId().longValue());
         assertEquals("Jorge", usuarioDTO.getNome());
         assertEquals("jorge@gmail.com", usuarioDTO.getEmail());
 
@@ -54,8 +57,7 @@ public class UsuarioServiceTest {
     @Order(2)
     public void testBFindAllUsuario(){
         Page<UsuarioDTO> usuarioDTOPage = this.usuarioService.findAll(PageRequest.of(0, 1));
-        assertEquals(1L,usuarioDTOPage.getTotalElements());
-        assertEquals(1L,usuarioDTOPage.getContent().get(0).getId().longValue());
+        assertEquals(3L,usuarioDTOPage.getTotalElements());
     }
 
     @Test

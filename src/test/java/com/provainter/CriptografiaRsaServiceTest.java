@@ -4,11 +4,14 @@ import com.provainter.exceptions.UsuarioNaoEncontradoException;
 import com.provainter.model.MapKeyCache;
 import com.provainter.model.dto.DigitoDTO;
 import com.provainter.model.dto.UsuarioDTO;
+import com.provainter.repository.UsuarioRepository;
 import com.provainter.service.CacheService;
 import com.provainter.service.CriptografiaRsaService;
 import com.provainter.service.UsuarioService;
+import org.junit.After;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +88,4 @@ public class CriptografiaRsaServiceTest {
         usuario.setDigitosUnicos(digitos);
         return usuario;
     }
-
 }
